@@ -7,7 +7,11 @@
   align-items: center;
   height: 100vh;
 }
-
+.container575{
+  max-width: 575px;
+  width:100%;
+  margin:12px auto;
+}
 .main {
   padding: 5rem 0;
   flex: 1;
