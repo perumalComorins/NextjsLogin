@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router';
 import React, {  useState,useContext } from 'react'; 
 import UserContext from './UserContext';
+import { fetchApi } from './utils/Api';
+import { config } from './utils/Config';
 
 function Login({ users }){
     const router = useRouter();
@@ -19,25 +21,21 @@ function Login({ users }){
             "email": email,
             "password":password
         }
-        const response = await fetch('http://c2d.comorins.com/api/admin/login',{
-            method: 'POST',
-            body: JSON.stringify(inputData),
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        })
+        const response = await fetchApi(config.LOGIN_API,inputData)
         const data = await response.json();
 
         
         if(data.status == "success"){
             user.setlogged(true);
+            localStorage.setItem('userLoginStatus', true);
             router.push("/posts");
         }
         else{
             user.setlogged(false);
+            localStorage.setItem('userLoginStatus', false);
             router.push("/login");
         }
-
+        
         
      }
     

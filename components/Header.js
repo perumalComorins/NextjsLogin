@@ -44,7 +44,8 @@ function Header(props){
                         <a className="nav-link">Login</a>
                     </Link>
                 </span>}
-                {user.islogged &&<a className="nav-link" onClick={()=> {user.setlogged(false); router.push('/login')} }>Logout</a>}
+                
+                {localStorage.getItem('userLoginStatus') && (<a className="nav-link" onClick={()=> {user.setlogged(false); router.push('/login')} }>Logout </a>)}
             </div>
         </nav>
         
